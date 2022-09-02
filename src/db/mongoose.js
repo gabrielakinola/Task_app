@@ -22,6 +22,15 @@ const User = mongoose.model("User", {
       }
     },
   },
+  password: {
+    type: String,
+    required: true,
+    validate(value) {
+      if (!validator.isStrongPassword(value)) {
+        throw new Error("Your password is not secure");
+      }
+    },
+  },
   age: {
     type: Number,
     validate(value) {
@@ -33,9 +42,10 @@ const User = mongoose.model("User", {
 });
 
 const me = new User({
-  name: "  Patricia   ",
+  name: "  Touluwanimi   ",
   age: "27",
-  email: "PATRICIA@gmail.com",
+  email: "Tolu@gmail.com",
+  password: "Wordpassni-01",
 });
 
 me.save()
