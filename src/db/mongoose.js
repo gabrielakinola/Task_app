@@ -67,11 +67,12 @@ const Task = mongoose.model("Tasks", {
   },
 });
 
-const me = new Task({
+const nme = new Task({
   description: "House Cleaning",
   completed: true,
 });
-me.save()
+nme
+  .save()
   .then(() => {
     console.log(me);
   })
