@@ -79,6 +79,8 @@ app.get("/users/:id", async (req, res) => {
     res.send(e).status(500);
   }
 });
+
+// without async await
 //   User.findById(_id)
 //     .then((user) => {
 //       if (!user) {
@@ -132,6 +134,9 @@ app.get("/tasks/:id", async (req, res) => {
   //     res.status(500).send(e);
   //   });
 });
+
+app.patch("/users/id", async(re, res));
+
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
