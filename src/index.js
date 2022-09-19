@@ -4,6 +4,7 @@ require("./db/mongoose");
 const User = require("./models/user");
 const Task = require("./models/task");
 const { findById } = require("./models/user");
+const { PromiseProvider } = require("mongoose");
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -173,6 +174,30 @@ app.patch("/tasks/:id", async (req, res) => {
 
     if (!task) {
       return res.status(400).send("No tasks matches that id");
+    }
+    res.send(task);
+  } catch (e) {
+    res.send(e).status(500);
+  }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+  try {
+    if (!user) {
+      return res.status(404).send(`User not found!`);
+    }
+    res.send(user);
+  } catch (e) {
+    res.send(e).status(500);
+  }
+});
+
+app.delete("/tasks/:id", async (req, res) => {
+  const task = await Task.findByIdAndDelete(req.params.id);
+  try {
+    if (!task) {
+      return res.status(404).send(`Task not found`);
     }
     res.send(task);
   } catch (e) {
