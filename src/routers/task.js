@@ -76,7 +76,16 @@ router.patch("/tasks/:id", async (req, res) => {
     return res.status(400).send({ error: " Invalid Upadates!" });
   }
   try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body);
+    const task = await Task.findById(req.params.id);
+    // console.log(task);
+    // console.log(updates);
+    updates.forEach((update) => (task[update] = req.body[update]));
+
+    await task.save();
+
+    //console.log(task);
+
+    //const task = await Task.findByIdAndUpdate(req.params.id, req.body);
 
     if (!task) {
       return res.status(400).send("No tasks matches that id");
