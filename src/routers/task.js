@@ -31,7 +31,7 @@ router.get("/tasks", async (req, res) => {
     res.send(e).status(500);
   }
 });
-
+//without async await
 //   Task.find({})
 //     .then((tasks) => {
 //       res.send(tasks);
