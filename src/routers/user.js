@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -17,6 +18,19 @@ router.post("/users", async (req, res) => {
   }
 });
 
+router.post("/users/login", async (req, res) => {
+  try {
+    const user = await User.findByCredentials(
+      req.body.email,
+      req.body.password
+    );
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
 //Without async await
 //   user
 //     .save()
@@ -29,13 +43,9 @@ router.post("/users", async (req, res) => {
 // });
 
 //Route to get all users
-router.get("/users", async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.send(users).status(200);
-  } catch (e) {
-    res.send(e).status(500);
-  }
+router.get("/users/me", auth, async (req, res) => {
+  res.send(req.user);
+  console.log(req);
 });
 
 //Without async await
@@ -112,19 +122,6 @@ router.delete("/users/:id", async (req, res) => {
     res.send(user);
   } catch (e) {
     res.send(e).status(500);
-  }
-});
-
-router.post("/users/login", async (req, res) => {
-  try {
-    const user = await User.findByCredentials(
-      req.body.email,
-      req.body.password
-    );
-    const token = await user.generateAuthToken();
-    res.send({ user, token });
-  } catch (e) {
-    res.status(400).send();
   }
 });
 

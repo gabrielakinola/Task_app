@@ -16,13 +16,13 @@ const port = process.env.PORT || 3000;
 // });
 
 //middleware for maintenance mode
-app.use((req, res, next) => {
-  if (req.method) {
-    res.send("Site is in maintenance mode!!! Try again soon");
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (req.method) {
+//     res.send("Site is in maintenance mode!!! Try again soon");
+//   } else {
+//     next();
+//   }
+// });
 
 app.use(express.json());
 app.use("/", userRoute);
@@ -50,16 +50,18 @@ app.listen(port, () => {
 
 //console.log(express);
 
-const jwt = require("jsonwebtoken");
+//json web tokens
 
-const myFunction = async () => {
-  const token = jwt.sign({ _id: "abc123" }, "thisismynewcourse", {
-    expiresIn: "7 days",
-  });
-  console.log(token);
+// const jwt = require("jsonwebtoken");
 
-  const data = jwt.verify(token, "thisismynewcourse");
-  console.log(data);
-};
+// const myFunction = async () => {
+//   const token = jwt.sign({ _id: "abc123" }, "thisismynewcourse", {
+//     expiresIn: "7 days",
+//   });
+//   console.log(token);
 
-myFunction();
+//   const data = jwt.verify(token, "thisismynewcourse");
+//   console.log(data);
+// };
+
+// myFunction();
