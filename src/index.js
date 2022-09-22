@@ -7,8 +7,24 @@ const { findById } = require("./models/user");
 const { PromiseProvider } = require("mongoose");
 const port = process.env.PORT || 3000;
 
-app.use(express.json());
+// app.use((req, res, next) => {
+//   if (req.method === "GET") {
+//     res.send("GET requests are disabled");
+//   } else {
+//     next();
+//   }
+// });
 
+//middleware for maintenance mode
+app.use((req, res, next) => {
+  if (req.method) {
+    res.send("Site is in maintenance mode!!! Try again soon");
+  } else {
+    next();
+  }
+});
+
+app.use(express.json());
 app.use("/", userRoute);
 app.use("/", taskRoute);
 
