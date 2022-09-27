@@ -47,6 +47,13 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+//Setting up virtual properties
+userSchema.virtual("tasks", {
+  ref: "Task",
+  localField: "name",
+  foreignField: "task",
+});
+
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {

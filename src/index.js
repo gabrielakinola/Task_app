@@ -64,3 +64,14 @@ app.listen(port, () => {
 // };
 
 // myFunction();
+
+//Creating a User/task relationship
+const Task = require("./models/task");
+
+const main = async () => {
+  const task = await Task.findById("63337a9d003e72f46132ce22");
+  await task.populate("owner");
+  console.log(task);
+};
+
+main();
