@@ -7,6 +7,13 @@ const { findById } = require("./models/user");
 const { PromiseProvider } = require("mongoose");
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use("/", userRoute);
+app.use("/", taskRoute);
+
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
+});
 // app.use((req, res, next) => {
 //   if (req.method === "GET") {
 //     res.send("GET requests are disabled");
@@ -23,14 +30,6 @@ const port = process.env.PORT || 3000;
 //     next();
 //   }
 // });
-
-app.use(express.json());
-app.use("/", userRoute);
-app.use("/", taskRoute);
-
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}`);
-});
 
 // const bcrypt = require("bcrypt");
 
