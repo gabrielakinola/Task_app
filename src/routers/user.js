@@ -18,6 +18,7 @@ router.post("/users", async (req, res) => {
   }
 });
 
+//Route to login
 router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
@@ -45,7 +46,6 @@ router.post("/users/login", async (req, res) => {
 //Route to get all users
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
-  console.log(req);
 });
 
 //Without async await
@@ -125,7 +125,7 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-router.get("/users/logout", auth, async (req, res) => {
+router.post("/users/logout", auth, async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter((token) => {
       return token.token !== req.token;
@@ -133,6 +133,20 @@ router.get("/users/logout", auth, async (req, res) => {
     await req.user.save();
 
     res.send();
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+router.post("/users/logoutAll", auth, async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter((token) => {
+      return token.token === "";
+    });
+
+    await req.user.save();
+
+    res.send("All users logged out");
   } catch (e) {
     res.status(500).send();
   }
