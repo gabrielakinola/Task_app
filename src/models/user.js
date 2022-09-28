@@ -50,8 +50,8 @@ const userSchema = new mongoose.Schema({
 //Setting up virtual properties
 userSchema.virtual("tasks", {
   ref: "Task",
-  localField: "name",
-  foreignField: "task",
+  localField: "_id",
+  foreignField: "owner",
 });
 
 userSchema.statics.findByCredentials = async (email, password) => {

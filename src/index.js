@@ -66,12 +66,16 @@ app.listen(port, () => {
 // myFunction();
 
 //Creating a User/task relationship
-const Task = require("./models/task");
+// const Task = require("./models/task");
+// const User = require("./models/user");
 
-const main = async () => {
-  const task = await Task.findById("63337a9d003e72f46132ce22");
-  await task.populate("owner");
-  console.log(task);
-};
+// const main = async () => {
+//   // const task = await Task.findById("63337a9d003e72f46132ce22");
+//   // await task.populate("owner");
+//   // console.log(task);
+//   const user = await User.findById("633378305980f9294f418397");
+//   await user.populate("tasks");
+//   console.log(user.tasks);
+// };
 
-main();
+// main();
