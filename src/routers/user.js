@@ -165,8 +165,16 @@ const upload = multer({
   },
 });
 
-router.post("/users/me/avatar", upload.single("avatar"), async (req, res) => {
-  res.send();
-});
+router.post(
+  "/users/me/avatar",
+  upload.single("avatar"),
+  auth,
+  async (req, res) => {
+    res.send("File updload succesful");
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
 
 module.exports = router;
