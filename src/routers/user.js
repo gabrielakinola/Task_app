@@ -152,7 +152,6 @@ router.post("/users/logoutAll", auth, async (req, res) => {
 });
 
 const upload = multer({
-  dest: "avatar",
   limits: {
     fileSize: 1000000,
   },
@@ -170,11 +169,19 @@ router.post(
   upload.single("avatar"),
   auth,
   async (req, res) => {
+    req.user.avatar = req.file.buffer;
+    await req.user.save();
     res.send("File updload succesful");
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
   }
 );
+
+router.delete("/users/me/avatar", auth, async (req, res) => {
+  req.user.avatar = undefined;
+  await req.user.save();
+  res.status(200).send(req.user);
+});
 
 module.exports = router;
