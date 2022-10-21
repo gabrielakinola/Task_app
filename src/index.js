@@ -7,13 +7,13 @@ const { findById } = require("./models/user");
 const { PromiseProvider } = require("mongoose");
 const port = process.env.PORT || 3000;
 
-const multer = require("multer");
-const upload = multer({
-  dest: "images",
-});
-app.post("/upload", upload.single("upload"), (req, res) => {
-  res.send();
-});
+// const multer = require("multer");
+// const upload = multer({
+//   dest: "images",
+// });
+// app.post("/upload", upload.single("upload"), (req, res) => {
+//   res.send();
+// });
 
 app.use(express.json());
 app.use("/", userRoute);
