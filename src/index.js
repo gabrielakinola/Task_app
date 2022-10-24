@@ -5,7 +5,7 @@ const userRoute = require("./routers/user");
 const taskRoute = require("./routers/task");
 const { findById } = require("./models/user");
 const { PromiseProvider } = require("mongoose");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // const multer = require("multer");
 // const upload = multer({
