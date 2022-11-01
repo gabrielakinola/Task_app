@@ -34,10 +34,13 @@ test("Should signup a new user", async () => {
 
 test("Should login a new user", async () => {
   try {
-    await request(app).post("/users/login").send({
-      email: "wdewd@wdned.com",
-      password: "uwdnwdn",
-    });
+    await request(app)
+      .post("/users/login")
+      .send({
+        email: "wdewd@wdned.com",
+        password: "uwdnwdnk1235",
+      })
+      .expect(400);
   } catch (e) {
     console.log(e);
   }
