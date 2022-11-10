@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema(
           throw new Error("Your password is not secure");
         }
       },
+      k,
     },
 
     age: {
